@@ -1,0 +1,110 @@
+
+<div class="tax-record-list-container">
+  <div class="header">
+    <h1>Tax Record Manager</h1>
+    <button class="btn btn-primary" (click)="onAdd()">
+      <i class="icon">+</i> Add New Record
+    </button>
+  </div>
+
+  <!-- Filters and Search -->
+  <div class="filters">
+    <div class="filter-row">
+      <div class="search-box">
+        <input 
+          type="text" 
+          [(ngModel)]="searchTerm" 
+          placeholder="Search by title..."
+          class="form-control">
+      </div>
+      
+      <div class="year-filter">
+        <select [(ngModel)]="selectedYear" class="form-control">
+          <option [ngValue]="null">All Years</option>
+          <option *ngFor="let year of availableYears" [value]="year">{{year}}</option>
+        </select>
+      </div>
+      
+      <button class="btn btn-secondary" (click)="clearFilters()">Clear Filters</button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading tax records...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error">
+    <p>{{error}}</p>
+    <button class="btn btn-primary" (click)="loadTaxRecords()">Retry</button>
+  </div>
+
+  <!-- Records Table -->
+  <div *ngIf="!loading && !error" class="records-container">
+    <div *ngIf="filteredAndSortedRecords.length === 0" class="no-records">
+      <p>No tax records found.</p>
+      <button class="btn btn-primary" (click)="onAdd()">Create Your First Record</button>
+    </div>
+
+    <div *ngIf="filteredAndSortedRecords.length > 0" class="records-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th (click)="onSort('recordTitle')" class="sortable">
+              Title 
+              <span class="sort-indicator" 
+                    [class.active]="sortBy === 'recordTitle'"
+                    [class.asc]="sortBy === 'recordTitle' && sortDirection === 'asc'"
+                    [class.desc]="sortBy === 'recordTitle' && sortDirection === 'desc'">
+                ↕
+              </span>
+            </th>
+            <th (click)="onSort('taxYear')" class="sortable">
+              Tax Year
+              <span class="sort-indicator"
+                    [class.active]="sortBy === 'taxYear'"
+                    [class.asc]="sortBy === 'taxYear' && sortDirection === 'asc'"
+                    [class.desc]="sortBy === 'taxYear' && sortDirection === 'desc'">
+                ↕
+              </span>
+            </th>
+            <th (click)="onSort('incomeAmount')" class="sortable">
+              Income
+              <span class="sort-indicator"
+                    [class.active]="sortBy === 'incomeAmount'"
+                    [class.asc]="sortBy === 'incomeAmount' && sortDirection === 'asc'"
+                    [class.desc]="sortBy === 'incomeAmount' && sortDirection === 'desc'">
+                ↕
+              </span>
+            </th>
+            <th>Deductions</th>
+            <th>Net Income</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of filteredAndSortedRecords" class="record-row">
+            <td class="title-cell">
+              <span class="record-title" *ngIf="record.id !== undefined" (click)="onEdit(record.id)">{{record.recordTitle}}</span>
+              <span *ngIf="record.notes" class="notes-preview">{{record.notes | slice:0:50}}{{record.notes.length > 50 ? '...' : ''}}</span>
+            </td>
+            <td>{{record.taxYear}}</td>
+            <td class="amount">${{record.incomeAmount | number:'1.2-2'}}</td>
+            <td class="amount">${{record.deductionsAmount | number:'1.2-2'}}</td>
+            <td class="amount net-income">${{calculateNetIncome(record) | number:'1.2-2'}}</td>
+            <td class="actions">
+              <button class="btn btn-sm btn-outline" *ngIf="record.id !== undefined" (click)="onEdit(record.id)" title="Edit">
+                ✏️
+              </button>
+              <button class="btn btn-sm btn-danger" *ngIf="record.id !== undefined" (click)="onDelete(record.id, record.recordTitle)" title="Delete">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
