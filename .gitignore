@@ -1,0 +1,58 @@
+# .gitignore for .NET projects
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Others
+*.vspscc
+*.vssscc
+_ReSharper*/
+*.ncrunch*
+*.localhistory/
+*.idea/
+*.sln.ide
+
+# Entity Framework
+Migrations/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Angular frontend (old path)
+tax-record-frontend/node_modules/
+tax-record-frontend/dist/
+tax-record-frontend/.angular/cache
+tax-record-frontend/.vscode/
+tax-record-frontend/.history/
+tax-record-frontend/npm-debug.log
+tax-record-frontend/yarn-error.log
+
+# Angular frontend (new path)
+Frontend/tax-records-frontend/node_modules/
+Frontend/tax-records-frontend/dist/
+Frontend/tax-records-frontend/.angular/cache
+Frontend/tax-records-frontend/.vscode/
+Frontend/tax-records-frontend/.history/
+Frontend/tax-records-frontend/npm-debug.log
+Frontend/tax-records-frontend/yarn-error.log
+
+# Coverage
+coverage/
+Frontend/tax-records-frontend/coverage/
