@@ -21,7 +21,7 @@
       <div class="year-filter">
         <select [(ngModel)]="selectedYear" class="form-control">
           <option [ngValue]="null">All Years</option>
-          <option *ngFor="let year of availableYears" [value]="year">{{year}}</option>
+          <option *ngFor="let year of availableYears" [ngValue]="year">{{year}}</option>
         </select>
       </div>
       

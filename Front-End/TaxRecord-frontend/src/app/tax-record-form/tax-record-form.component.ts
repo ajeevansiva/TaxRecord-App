@@ -41,7 +41,6 @@ export class TaxRecordFormComponent implements OnInit {
       }
 
     });
-    console.log("this works")
   }
 
   createForm(): FormGroup {
@@ -96,7 +95,7 @@ export class TaxRecordFormComponent implements OnInit {
       };
       this.taxRecordService.updateTaxRecord(this.recordId, updateData).subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/tax-record']);
         },
         error: (error) => {
           this.error = `Failed to update record: ${error}`;
@@ -116,7 +115,7 @@ export class TaxRecordFormComponent implements OnInit {
       .pipe(finalize(() => this.submitting = false))
       .subscribe({
         next: () => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/tax-record']);
           console.log("works fine");
         },
         error: (error) => {
@@ -129,7 +128,7 @@ export class TaxRecordFormComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/tax-record']);
   }
 
   onReset(): void {

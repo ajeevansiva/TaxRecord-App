@@ -6,7 +6,7 @@ import {TaxRecordListComponent} from '../app/tax-record-list/tax-record-list';
 
 @Component({
   selector: 'app-root',
-  imports: [TaxRecordFormComponent, TaxRecordListComponent],
+  imports: [TaxRecordFormComponent, TaxRecordListComponent,RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

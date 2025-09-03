@@ -104,7 +104,7 @@ export class TaxRecordListComponent {
   }
 
   onEdit(id: number): void {
-    this.router.navigate(['/edit', id]);
+    this.router.navigate(['/tax-record/edit', id]);
   }
 
   onDelete(id: number, recordTitle: string): void {
@@ -122,7 +122,7 @@ export class TaxRecordListComponent {
   }
 
   onAdd(): void {
-    this.router.navigate(['/add']);
+    this.router.navigate(['/tax-record/edit/:id']);
   }
 
   clearFilters(): void {
