@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TaxRecordService, CreateTaxRecord, UpdateTaxRecord } from '../taxrecord-service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-tax-record-form',
@@ -82,7 +83,7 @@ export class TaxRecordFormComponent implements OnInit {
       this.markFormGroupTouched();
       return;
     }
-    this.submitting = true;
+    this.submitting = false;
     this.error = null;
     const formValue = this.taxRecordForm.value;
     if (this.isEditMode && this.recordId) {
@@ -111,9 +112,12 @@ export class TaxRecordFormComponent implements OnInit {
         deductionsAmount: formValue.deductionsAmount,
         notes: formValue.notes || null
       };
-      this.taxRecordService.createTaxRecord(createData).subscribe({
+      this.taxRecordService.createTaxRecord(createData)
+      .pipe(finalize(() => this.submitting = false))
+      .subscribe({
         next: () => {
           this.router.navigate(['/']);
+          console.log("works fine");
         },
         error: (error) => {
           this.error = `Failed to create record: ${error}`;
