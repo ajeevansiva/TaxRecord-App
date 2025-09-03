@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaxRecordList } from './tax-record-list';
+import { TaxRecordListComponent } from './tax-record-list';
 
-describe('TaxRecordList', () => {
-  let component: TaxRecordList;
-  let fixture: ComponentFixture<TaxRecordList>;
+describe('TaxRecordListComponent', () => {
+  let component: TaxRecordListComponent;
+  let fixture: ComponentFixture<TaxRecordListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaxRecordList]
+      imports: [TaxRecordListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TaxRecordList);
+    fixture = TestBed.createComponent(TaxRecordListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
