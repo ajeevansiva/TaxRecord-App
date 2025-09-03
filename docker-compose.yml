@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    container_name: taxrecord_api
+    ports:
+      - "5097:5097"
+    environment:
+      - ASPNETCORE_URLS=http://+:5097
+    networks:
+      - taxrecord_network
+
+  frontend:
+    build: ./Front-End/TaxRecord-frontend
+    container_name: taxrecord_frontend
+    ports:
+      - "4200:80"   # browser uses 4200; Nginx listens on 80 in the container
+    depends_on:
+      - api
+    networks:
+      - taxrecord_network
+
+networks:
+  taxrecord_network:
+    driver: bridge
