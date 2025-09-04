@@ -42,8 +42,8 @@ A full-stack application for managing tax records, built with ASP.NET Core (back
 		 ```sh
 		 docker-compose down
 		 ```
-3. The API will be available at [http://localhost:5097](http://localhost:5097)
-4. The frontend will be available at [http://localhost:4200](http://localhost:4200)
+3. The API will be available at [http://localhost:5097/swagger/index.html](http://localhost:5097/swagger/index.html)
+4. The frontend will be available at [http://localhost:4200/tax-record](http://localhost:4200/tax-record)
 
 ### Key Files
 
