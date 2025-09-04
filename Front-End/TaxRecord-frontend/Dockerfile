@@ -1,13 +1,17 @@
-# Build stage
+# Stage 1: Build Angular app
 FROM node:20 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build -- TaxRecord-frontend --configuration production
+RUN npm run build -- --configuration production
 
-# Serve with nginx
+# Stage 2: Serve with Nginx
 FROM nginx:alpine
-COPY --from=build /app/dist/TaxRecord-frontend /usr/share/nginx/html
+COPY --from=build /app/dist/TaxRecord-frontend/browser /usr/share/nginx/html
+
+# Custom nginx config for Angular routing
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
