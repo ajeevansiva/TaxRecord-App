@@ -55,6 +55,7 @@ A full-stack application for managing tax records, built with ASP.NET Core (back
 - `Data/TaxRecordContext.cs` - EF Core DB context
 - `Dockerfile` - Docker build for backend
 
+
 #### Frontend
 - `src/app/tax-record-form/tax-record-form.component.ts` - Tax record form component
 - `src/app/tax-record-list/tax-record-list.ts` - Tax record list component
@@ -62,6 +63,10 @@ A full-stack application for managing tax records, built with ASP.NET Core (back
 - `src/app/app.config.ts` - Angular app configuration
 - `src/app/app.ts` - Main Angular app bootstrap
 - `Dockerfile` - Docker build for frontend
+- `nginx.conf` - Custom Nginx config for Angular SPA routing
+
+##### Nginx Config for Angular SPA
+The `nginx.conf` file ensures that Angular's client-side routing works correctly in production. It rewrites all requests to `index.html` so that deep links and browser refreshes work as expected. This is copied into the Nginx container by the frontend Dockerfile.
 
 #### Orchestration
 - `docker-compose.yml` - Multi-container orchestration for full stack app
